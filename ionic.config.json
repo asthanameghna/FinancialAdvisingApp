@@ -1,0 +1,8 @@
+{
+  "name": "hiveup-proto",
+  "app_id": "a1308514",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
