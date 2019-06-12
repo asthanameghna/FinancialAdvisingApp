@@ -1,0 +1,55 @@
+<!--
+DEPRECATED AS AT ITERATION 3. NOT INVOKING AS MODAL ANYMORE, WILL BE INCORPORATED INTO FORM.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class='title-center'>Add Coverage</ion-title>
+    <ion-buttons start>
+      <button ion-button color='primary' class='navbar-textbutton' clear small (click)='dismiss()'><strong>Back</strong>
+      </button>
+
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!--form for coverages only-->
+  <form (ngSubmit)='passBackToMainForm()' #addCoverageForm='ngForm' margin-vertical>
+    <div>Previous selection: </div>
+    <ion-grid>
+      <ng-container *ngFor='let key of coverageToAdd | keys'>
+        <ion-row *ngIf="coverageToAdd[key] > 0 || coverageToAdd[key] != null">
+          <ion-col col-6>{{key}}</ion-col>
+          <ion-col>${{coverageToAdd[key]}}</ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+    <ion-item>
+      <ion-label class='coverage-label' color='primary' stacked>Coverage Type</ion-label>
+      <ion-select #coverageLists='ngModel' required [ngModelOptions]='{standalone: true}' [(ngModel)]='selected' multiple="true">
+        <ion-option value="death">DEATH</ion-option>
+        <ion-option value="accidentalDeath">ACCIDENTAL DEATH</ion-option>
+        <ion-option value="CI">CRITICAL ILLNESS</ion-option>
+        <ion-option value="eCI">EARLY CRITICAL ILLNESS</ion-option>
+        <ion-option value="TPD">TOTAL PERMANENT DISABILITY</ion-option>
+        <ion-option value="hospitalisation">HOSPITALISATION</ion-option>
+        <ion-option value="personalAccident">PERSONAL ACCIDENT</ion-option>
+        <ion-option value="retirement">RETIREMENT FUNDS</ion-option>
+        <ion-option value="disabilityIncome">DISABILITY INCOME</ion-option>
+      </ion-select>
+
+    </ion-item>
+
+
+    <!-- Display coverage amount input option by the no. of coverages selected above.-->
+    <ion-item *ngFor='let item of selected; trackBy:tracker'>
+      <ion-label class='coverage-label' color='primary' stacked>Amount for: {{item}}</ion-label>
+      <ion-input #coverageToAdd.item='ngModel' required name='coverageToAdd.item' min="0" type='number' [(ngModel)]='coverageToAdd[item]'
+        placeholder="($)"></ion-input>
+    </ion-item>
+    <button ion-button text-center full margin-top type='submit' [disabled]='!addCoverageForm.form.valid'>Add Coverage</button>
+  </form>
+</ion-content>

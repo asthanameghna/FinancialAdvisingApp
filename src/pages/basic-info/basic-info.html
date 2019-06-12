@@ -1,0 +1,70 @@
+<!--
+  Generated template for the Profile page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class='title-center' text-uppercase>MY BASIC INFORMATION</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-card no-margin style='width: 100%'>
+                <ion-row>
+                    <ion-col> 
+                        <a class='button' icon-only (click)='openEditModal()'style="float:right;">
+                            <ion-icon name='md-create'></ion-icon>
+                        </a>
+                    </ion-col>
+                </ion-row>
+                <!--div>
+                <img class = "img-circle" *ngIf="firebase.profile.picture" src="{{firebase.profile.picture}}" >
+                <img class = "img-circle" *ngIf= "!firebase.profile.picture" src= 'assets/img/dummy_profilepic.png'>
+                  <img src=>
+                </div>-->
+                <ion-row>
+            <div>
+                <ion-card-header class='profile-name'>Name</ion-card-header>
+                <ion-card-content class='profile-name-content'>{{firebase.profile.name || 'No Information'}}</ion-card-content>
+                <!--<button ion-item detail-none style='padding: 10px 6px 10px 10px'>
+                    <h2 *ngIf='firebase.profile'>{{firebase.profile.name || 'Loading Profile...'}}</h2>
+                </button>-->
+            </div>
+                </ion-row>
+        </ion-card>
+        </ion-row>
+        <ion-row>
+            <ion-card no-margin style='width: 100%'>
+                <ion-card-header class='profile-name'>Phone Number</ion-card-header>
+                <ion-card-content class='profile-name-content'>{{firebase.profile.phone || 'No Information'}}</ion-card-content>
+            </ion-card>
+        </ion-row>
+        <ion-row>
+            <ion-card no-margin style='width: 100%'>
+                <ion-card-header class='profile-email'>Occupation</ion-card-header>
+                <ion-card-content class='profile-email-content'>{{(firebase.profile.occupation) || 'No Information'}}</ion-card-content>
+            </ion-card>
+        </ion-row>
+        <ion-row>
+            <ion-card no-margin style='width: 100%'>
+                <a class="icon ion-home custom-icon" icon-only style="float:right;">
+                        <ion-icon name='md-lock'></ion-icon>
+                </a>
+                <ion-card-header class='profile-email'>E-mail</ion-card-header>
+                <ion-card-content class='profile-email-content'>{{(firebase.profile.email) || 'No Information'}}</ion-card-content>
+                
+                <!--<button ion-item detail-none style='padding: 10px 6px 10px 10px'>
+                    <p *ngIf='firebase.profile'>{{(firebase.profile.email) || ''}}</p>
+                </button>-->
+            </ion-card>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,580 @@
+<!-- Almost a replica of add-insurance form. Just that it populates the data from the policy detail page.
+  -->
+  <ion-header>
+    <ion-navbar>
+      <ion-buttons>
+        <button ion-button type='button' color='light' class='navbar-textbutton' clear small (click)='dismiss()'><strong>Cancel</strong>
+        </button>
+      </ion-buttons>
+      <ion-title class='title-center'>Edit Policy</ion-title>
+      
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form (ngSubmit)='checkFormInformation()' #editInsuranceForm='ngForm' margin-vertical *ngIf='!uploadToggle'>
+      <ion-slides pager="true">
+        <ion-slide>
+          <!-- FIRST SLIDE-->
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Policy Owner (required)</ion-label>
+            <ion-input #policyName='ngModel' required name='policyOwner' type='text' [(ngModel)]='insuranceStatement.policyOwner' placeholder="Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Policy Type (required)</ion-label>
+            <ion-select #frequency='ngModel' required name='policyType' [(ngModel)]='policyType'>
+              <ion-option value="Group">Group</ion-option>
+              <ion-option value="Individual">Individual</ion-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Policy Number</ion-label>
+            <ion-input #policyName='ngModel' name='policyNumber' type='text' [(ngModel)]='insuranceStatement.policyNumber'></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Policy Name (required)</ion-label>
+            <ion-input #policyName='ngModel' required name='policyName' type='text' [(ngModel)]='insuranceStatement.policyName' placeholder="Full Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Country of Purchase (required)</ion-label>
+            <ion-input #policyName='ngModel' required name='countryOfPurchase' type='text' [(ngModel)]='insuranceStatement.countryOfPurchase' placeholder="Country Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked> Insurer (required)</ion-label>
+            <ion-input #policyName='ngModel' required name='policyInsurer' type='text' [(ngModel)]='insuranceStatement.policyInsurer' placeholder="Full Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked> Representative Agency (required)</ion-label>
+            <ion-input #policyName='ngModel' required name='policyIRepresentativeAgency' type='text' [(ngModel)]='insuranceStatement.policyRepresentativeAgency' placeholder="Agency Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked> Plan Tier (required)</ion-label>
+            <ion-input #policyName='ngModel' required name='policyPlanTier' type='text' [(ngModel)]='insuranceStatement.policyPlanTier' placeholder="Plan Tier"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Insured Person</ion-label>
+            <ion-input #insuredPerson='ngModel' name='insuredPerson' type='text' [(ngModel)]='insuranceStatement.insuredPerson' placeholder="Full Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Beneficiary</ion-label>
+            <ion-input #policyName='ngModel' name='beneficiary' type='text' [(ngModel)]='insuranceStatement.beneficiary' placeholder="Full Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Company (for Group Policy only)</ion-label>
+            <ion-input #policyName='ngModel' name='policyGroupCompanyName' type='text' [(ngModel)]='insuranceStatement.policyGroupCompanyName' placeholder="Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Maximum Entry Age (for Group Policy only)</ion-label>
+            <ion-input #policyName='ngModel' name='policyGroupMaxEntryAge' type='number' [(ngModel)]='insuranceStatement.policyGroupMaxEntryAge'></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Maximum Renewable Age (for Group Policy only)</ion-label>
+            <ion-input #policyName='ngModel' name='policyGroupMaxRenewableAge' type='number' [(ngModel)]='insuranceStatement.policyGroupMaxRenewableAge'></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Premium (required)</ion-label>
+            <ion-input #premiumAmount='ngModel' required name='premiumAmount' type='number' [(ngModel)]='insuranceStatement.premiumAmount' placeholder="Amount per payment"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Frequency Of Premium Payment (required)</ion-label>
+            <ion-select #frequency='ngModel' required name='frequency' [(ngModel)]='insuranceStatement.frequency'>
+              <ion-option value="One Time">One Time</ion-option>
+              <ion-option value="Monthly">Monthly</ion-option>
+              <ion-option value="Quarterly">Quarterly</ion-option>
+              <ion-option value=Bi-Annually>Bi-Annually</ion-option>
+              <ion-option value="Annually">Annually</ion-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Policy Inception Date</ion-label>
+            <ion-datetime name='policyTermFrom' max="2030" pickerFormat="DD-MMM-YYYY" displayFormat="DD-MMM-YYYY" [(ngModel)]='insuranceStatement.policyTermFrom'>
+            </ion-datetime>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Policy Expiry Date</ion-label>
+            <ion-datetime name='policyTermTo' displayFormat="DD-MMM-YYYY" max="2100" min="{{insuranceStatement.policyTermFrom}}" [(ngModel)]='insuranceStatement.policyTermTo'>
+            </ion-datetime>
+          </ion-item>
+        </ion-slide>
+  
+        <ion-item>
+          <ion-label class='insurance-label' color='primary' stacked>Premium Start Date</ion-label>
+          <ion-datetime name='premiumTermFrom' max="2030" pickerFormat="DD-MMM-YYYY" displayFormat="DD-MMM-YYYY" [(ngModel)]='insuranceStatement.premiumTermFrom'>
+          </ion-datetime>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label class='insurance-label' color='primary' stacked>Premium End Date</ion-label>
+          <ion-datetime name='premiumTermTo' displayFormat="DD-MMM-YYYY" max="2100" min="{{insuranceStatement.premiumTermFrom}}" [(ngModel)]='insuranceStatement.premiumTermTo'>
+          </ion-datetime>
+        </ion-item>
+      
+  
+        <!-- SECOND SLIDE-->
+        <ion-slide>
+          <div id='previous-selection'>Select Coverages: </div>
+          <ion-grid>
+  
+            <ng-container *ngFor='let key of coverageToAdd | keys'>
+              <ion-row *ngIf="coverageToAdd[key] > 0 || coverageToAdd[key] != null">
+                <ion-col col-8 id='previous-selection-item'>
+                  <img src='assets/img/{{key}}.png' class='coverage-icons'> {{coverageListTitles[key]}}
+                </ion-col>
+                <ion-col id='previous-selection-item'>${{coverageToAdd[key] | safeNumber}}</ion-col>
+              </ion-row>
+            </ng-container>
+          </ion-grid>
+  
+          <ion-item>
+            <ion-label class='coverage-label' color='primary' stacked>Coverage Type</ion-label>
+            <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='selected' multiple="true">
+              <ion-option value="death">Death</ion-option>
+              <ion-option value="accidentalDeath">Accidental Death</ion-option>
+              <ion-option value="CI">Critical Illness</ion-option>
+              <ion-option value="eCI">Early Critical Illness</ion-option>
+              <ion-option value="TPD">Total Permanent Disability</ion-option>
+              <ion-option value="hospitalisation">Hospitalisation</ion-option>
+              <ion-option value="personalAccident">Personal Accident</ion-option>
+              <ion-option value="maternity">Pre-natal</ion-option>
+              <ion-option value="disabilityIncome">Disability</ion-option>
+              <ion-option value="longTermCare">Long Term Care</ion-option>
+            </ion-select>
+  
+          </ion-item>
+          <!--
+          <ion-list>
+            <ion-item *ngFor='let item of selected'>
+              <ion-label class='coverage-label' color='primary' stacked>Amount For: {{coverageListTitles[item]}}, {{coverageToAdd[item]}}</ion-label>
+              <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd[item]'
+                placeholder="($)" pattern='[0-9]*' inputmode='numeric'></ion-input>
+            </ion-item>
+          </ion-list> -->
+  
+          <ng-container *ngFor='let item of selected'>
+            <ion-item>
+              <ion-label class='coverage-label' color='primary' stacked>Sum Assured/Basic Benefits</ion-label>
+              <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd[item]'
+                placeholder="($)" inputmode='numeric' value='coverageToAdd[item]'></ion-input>
+            </ion-item>
+            </ng-container>  
+  
+          <!-- For death -->
+          
+          <ion-item *ngIf='selected.includes("death")'>
+            <ion-label class='coverage-label' color='primary' stacked>Terminal Illness</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["death"]'
+              placeholder="" inputmode='text' value='coverageToAdd["death"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("death")'>
+            <ion-label class='coverage-label' color='primary' stacked>Total Permanent Disability</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["death"]'
+              placeholder="" inputmode='text' value='coverageToAdd["death"]'></ion-input>
+          </ion-item>  
+  
+          <!-- For Critical Illness -->
+  
+          <ion-item *ngIf='selected.includes("CI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Total Benefit Payout</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["CI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["CI"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("CI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Early Stage Diagnosis Payout</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["CI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["CI"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("CI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Intermediate Stage Diagnosis Payout</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["CI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["CI"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("CI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Severe Stage Diagnosis Payout</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["CI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["CI"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("CI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Death Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["CI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["CI"]'></ion-input>
+          </ion-item>
+  
+          <!-- For Early Critical Illness -->
+  
+          <ion-item *ngIf='selected.includes("eCI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Early Stage Diagnosis Payout</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["eCI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["eCI"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("eCI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Intermediate Stage Diagnosis Payout</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["eCI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["eCI"]'></ion-input>
+          </ion-item>
+          
+          <ion-item *ngIf='selected.includes("eCI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Severe Stage Diagnosis Payout</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["eCI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["eCI"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("eCI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Special Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["eCI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["eCI"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("eCI")'>
+            <ion-label class='coverage-label' color='primary' stacked>Death Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["eCI"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["eCI"]'></ion-input>
+          </ion-item>
+  
+          <!-- For hospitalisation -->
+  
+          <ion-item *ngIf='selected.includes("hospitalisation")'>
+            <ion-label class='coverage-label' color='primary' stacked>Hospital Type</ion-label>
+            <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='insuranceStatement.hospitalType'>
+              <ion-option value="Private">Private</ion-option>
+              <ion-option value="Public">Public</ion-option>
+            </ion-select>  
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("hospitalisation")'>
+            <ion-label class='coverage-label' color='primary' stacked>Hospital Name</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["hospitalisation"]'
+            placeholder="Name" inputmode='text' value='coverageToAdd["hospitalisation"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("hospitalisation") && insuranceStatement.hospitalType === "Public"'>
+            <ion-label class='coverage-label' color='primary' stacked>Hospital Ward</ion-label>
+            <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='insuranceStatement.hospitalWard'>
+              <ion-option value="A Class Ward & below">A Class Ward & below</ion-option>
+              <ion-option value="B1 Class Ward & below">B1 Class Ward & below</ion-option>
+              <ion-option value="B2/C Class Ward">B2/C Class Ward</ion-option>
+            </ion-select>  
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("hospitalisation") && insuranceStatement.hospitalType === "Private"'>
+            <ion-label class='coverage-label' color='primary' stacked>Hospital Ward</ion-label>
+            <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='insuranceStatement.hospitalWard'>
+              <ion-option value="Standard Room">Standard Room</ion-option>
+            </ion-select>  
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("hospitalisation")'>
+            <ion-label class='coverage-label' color='primary' stacked>Deductible</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["hospitalisation"]'
+            placeholder="($)" inputmode='numeric' value='coverageToAdd["hospitalisation"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("hospitalisation")'>
+            <ion-label class='coverage-label' color='primary' stacked>Co-Insurance</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["hospitalisation"]'
+            placeholder="($)" inputmode='numeric' value='coverageToAdd["hospitalisation"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("hospitalisation")'>
+            <ion-label class='coverage-label' color='primary' stacked>Co-Payment (if applicable)</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["hospitalisation"]'
+            placeholder="($)" inputmode='numeric' value='coverageToAdd["hospitalisation"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("hospitalisation")'>
+            <ion-label class='coverage-label' color='primary' stacked>Limit per Policy Year (Hospitalisation):</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["hospitalisation"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["hospitalisation"]'></ion-input>
+          </ion-item>
+  
+          <!-- For Personal Accident -->
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Accidental Death</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Accidental Dismemberment and Burns</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Daily Hospital Income Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>National Service Cover Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Temporary Total Disability Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Temporary Partial Disability Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Ambulance Service</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Mobility Aids</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Payout 1</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Payout 2</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Payout 3</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("personalAccident")'>
+            <ion-label class='coverage-label' color='primary' stacked>Payout 4</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["personalAccident"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["personalAccident"]'></ion-input>
+          </ion-item>
+  
+          <!-- For pre-natal -->
+  
+          <ion-item *ngIf='selected.includes("maternity")'>
+            <ion-label class='coverage-label' color='primary' stacked>Pregnancy Complications</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["maternity"]'
+              placeholder="" inputmode='text' value='coverageToAdd["maternity"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("maternity")'>
+            <ion-label class='coverage-label' color='primary' stacked>Hospital Care Benefit for Mother</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["maternity"]'
+              placeholder="" inputmode='text' value='coverageToAdd["maternity"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("maternity")'>
+            <ion-label class='coverage-label' color='primary' stacked>Death of Mother</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["maternity"]'
+              placeholder="" inputmode='text' value='coverageToAdd["maternity"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("maternity")'>
+            <ion-label class='coverage-label' color='primary' stacked>Congenital Illness of Child</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["maternity"]'
+              placeholder="" inputmode='text' value='coverageToAdd["maternity"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("maternity")'>
+            <ion-label class='coverage-label' color='primary' stacked>Hospital Care Benefit for Child</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["maternity"]'
+              placeholder="" inputmode='text' value='coverageToAdd["maternity"]'></ion-input>
+          </ion-item>
+  
+          <!-- For disability income-->
+  
+          <ion-item *ngIf='selected.includes("disabilityIncome")'>
+            <ion-label class='coverage-label' color='primary' stacked>Replacement Income under Total Disability</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["disabilityIncome"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["disabilityIncome"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("disabilityIncome")'>
+            <ion-label class='coverage-label' color='primary' stacked>Premium Waiver</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["disabilityIncome"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["disabilityIncome"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("disabilityIncome")'>
+            <ion-label class='coverage-label' color='primary' stacked>Partial Disability Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["disabilityIncome"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["disabilityIncome"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("disabilityIncome")'>
+            <ion-label class='coverage-label' color='primary' stacked>Rehabilitation Reimbursement</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["disabilityIncome"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["disabilityIncome"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("disabilityIncome")'>
+            <ion-label class='coverage-label' color='primary' stacked>Death Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["disabilityIncome"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["disabilityIncome"]'></ion-input>
+          </ion-item>
+          
+          <!-- For long term care income-->
+  
+          <ion-item *ngIf='selected.includes("longTermCare")'>
+            <ion-label class='coverage-label' color='primary' stacked>Monthly Severe Disability Benefits</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["longTermCare"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["longTermCare"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("longTermCare")'>
+            <ion-label class='coverage-label' color='primary' stacked>Benefits Payout Duration</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["longTermCare"]'
+              placeholder="In Months" inputmode='numeric' value='coverageToAdd["longTermCare"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("longTermCare")'>
+            <ion-label class='coverage-label' color='primary' stacked>Inability to Perform at least ___ of 6 ADLs</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["longTermCare"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["longTermCare"]'></ion-input>
+          </ion-item>
+  
+          <ion-item *ngIf='selected.includes("longTermCare")'>
+            <ion-label class='coverage-label' color='primary' stacked>Lump Sum Initial Benefit</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd["longTermCare"]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd["longTermCare"]'></ion-input>
+          </ion-item>
+  
+          <!-- For other types of coverages >
+          <ng-container *ngFor='let item of selected'>
+          <ion-item *ngIf='(item !== "hospitalisation") && (item !== "disabilityIncome")'>
+            <ion-label class='coverage-label' color='primary' stacked>Amount for: {{coverageListTitles[item]}}</ion-label>
+            <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd[item]'
+              placeholder="($)" inputmode='numeric' value='coverageToAdd[item]'></ion-input>
+          </ion-item>
+          </ng-container-->  
+  
+          <ng-container *ngFor='let item of selected'>
+            <ion-item>
+              <ion-label class='coverage-label' color='primary' stacked>All Other Information</ion-label>
+              <ion-input #coverageToAdd.item='ngModel' [ngModelOptions]="{standalone: true}" min="0" type='number' pattern="[0-9]*" [(ngModel)]='coverageToAdd[item]'
+                placeholder="" inputmode='text' value='coverageToAdd[item]'></ion-input>
+            </ion-item>
+            </ng-container>
+  
+          <ion-item>
+            <ion-label class='coverage-label' color='primary' stacked>Mode of Payment</ion-label>
+            <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='insuranceStatement.modeOfPayment'>
+              <ion-option value="GIRO">GIRO</ion-option>
+              <ion-option value="Credit Card">Credit Card</ion-option>
+              <ion-option value="Debit Card">Debit Card</ion-option>
+              <ion-option value="Cash">Cash</ion-option>
+              <ion-option value="CPF">CPF</ion-option>
+              <ion-option value="Bank Transfer">Bank Transfer</ion-option>
+              <ion-option value="Others">Others</ion-option>
+            </ion-select>
+  
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='coverage-label' color='primary' stacked>Insurer Company</ion-label>
+            <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='insuranceStatement.insurerCompany'>
+              <ion-option value="AIA">AIA</ion-option>
+              <ion-option value="AXA">AXA</ion-option>
+              <ion-option value="Aviva">Aviva</ion-option>
+              <ion-option value="Tokio Marine">Tokio Marine</ion-option>
+              <ion-option value="Great Eastern">Great Eastern</ion-option>
+              <ion-option value="Manulife">Manulife</ion-option>
+              <ion-option value="Prudential">Prudential</ion-option>
+              <ion-option value="NTUC Income">NTUC Income</ion-option>
+              <ion-option value="Liberty">Liberty</ion-option>
+              <ion-option value="Others">Others</ion-option>
+            </ion-select>
+  
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Advisor's Name</ion-label>
+            <ion-input #policyName='ngModel' name='advisorName' type='text' [(ngModel)]='insuranceStatement.advisorName' placeholder="Advisor's Name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label class='insurance-label' color='primary' stacked>Advisor's Contact Number</ion-label>
+            <ion-input #policyName='ngModel' name='advisorContact' type='tel' [(ngModel)]='insuranceStatement.advisorContact'></ion-input>
+          </ion-item>
+        </ion-slide>
+        <!-- THIRD SLIDE -->
+        <ion-slide>
+          <ion-item id="additional-notes-item">
+            <ion-label class='insurance-label-notes' color='primary' stacked>Additional Notes</ion-label>
+            <ion-textarea rows="5" #additionalNotes='ngModel' name='additionalNotes' type='text' [(ngModel)]='insuranceStatement.additionalNotes'
+              placeholder="Any additional notes for this policy." id="additional-notes-textarea"></ion-textarea>
+          </ion-item>
+  
+          <!-- <button ion-button outline icon-left id="photoButton" type="button" (click)="selectPhotoForReference()">
+        <ion-icon ios="ios-camera" md="md-camera" color="primary"></ion-icon>
+        Add Policy Photo As Attachment
+      </button>
+          <div class="instructions" *ngIf='images.length > 0'>
+            <p>Click on image to view</p>
+            <p>Press & hold image to delete</p>
+  
+          </div>
+          <div *ngIf='images.length > 0'>
+            <ion-grid no-padding>
+              <ion-row>
+                <ion-col col-4 *ngFor="let i of images | keys">
+                  <div class="frame">
+                    <div class="crop">
+                      <img [src]='images[i]' (press)="markForDeletion(i)" class="photos" imageViewer/>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+  
+            </ion-grid>
+          </div>
+          <div class='upload-photos-blank' *ngIf='images.length === 0'>
+            <h3>You can add photos (up to 5) as attachments to your policy.</h3>
+          </div> -->
+  
+  
+          <ion-item padding-bottom no-lines></ion-item>
+          <button ion-button text-center full margin-top type='submit' [disabled]='!editInsuranceForm.form.valid'>Save Changes</button>
+        </ion-slide>
+  
+      </ion-slides>
+    </form>
+    <div class='upload-progress-container' text-center *ngIf='uploadToggle'>
+      <h3>{{uploadTitle}}</h3>
+      <progress-bar [progress]='uploadProgressPercentage'></progress-bar>
+    </div>
+  </ion-content>
+  

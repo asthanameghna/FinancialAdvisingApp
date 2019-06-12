@@ -1,0 +1,37 @@
+
+
+
+<ion-content padding>
+  <ion-slides pager="true">
+    <!-- FIRST SLIDE -->
+      <ion-slide>
+        <img src='assets/img/logo-beta.png' id="logo">
+        <div class="content">SWIPE LEFT</div>
+        <!--<div class="slogan">INVEST WITHOUT A STING</div>-->
+      </ion-slide>
+    <!-- SECOND SLIDE -->
+      <ion-slide>
+          <img src='assets/img/financial-overview.png'>
+        <div class="header">FINANCIAL OVERVIEW</div>
+        <div class="content">Consolidate your insurance statements and get a snapshot of your financial health.</div>
+      </ion-slide>
+
+    <!-- THIRD SLIDE --> 
+      <ion-slide>
+           <img src='assets/img/advice.png'>
+        <div class="header-page2">GET FREE ADVICE</div>
+        <div class="content-page2">Obtain free advice from certified financial advisors.</div>  
+        <button ion-button icon-left color="secondary" class="lets-get-started"(click)="navigateToSignIn()">
+          Let's Get Started
+        </button>
+        <div>
+          <ion-toolbar>
+            <div id="footer-content">Already have an account?
+            <button ion-button clear (click)="navigateToLogin()" id="login">Log In</button></div>
+          </ion-toolbar>
+        </div>
+      </ion-slide>
+  </ion-slides>      
+</ion-content>
+
+  

@@ -1,0 +1,83 @@
+<!--
+  Generated template for the Speak To Advisor page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title class='title-center' text-uppercase>SPEAK TO ADVISOR</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="center" padding>
+    
+      <form (ngSubmit)='sendAdvisorRequestEmail()' #resetEmailForm='ngForm' novalidate>
+
+            <ion-item>
+              <ion-label class='login-fields' color='primary' stacked>Scope of Advice</ion-label>
+              <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='advisorRequest.scope' multiple="true"
+                (ionChange)='onChange(advisorRequest.scope)'>
+                <ion-option value=" Specific Policy Group">Specific Policy Group</ion-option>
+                <ion-option value=" Insurance In General">Insurance in General</ion-option>
+                <ion-option value=" Finance In General">Finance in General</ion-option>
+              </ion-select>
+    
+            </ion-item>
+
+            <ion-item *ngIf='advisorRequest.scope.includes(" Specific Policy Group")'>
+                <ion-label class='login-fields' color='primary' stacked>Policy Group</ion-label>
+                <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='advisorRequest.policyGroup' multiple="true"
+                (ionChange)='onChange(advisorRequest.scope)'>
+                <ion-option value=" Long Term Care">Long Term Care</ion-option>
+                <ion-option value=" Hospital and Surgical">Hospital and Surgical</ion-option>
+                <ion-option value=" Pre-Natal">Pre-Natal</ion-option>
+                <ion-option value=" Death">Death</ion-option>
+                <ion-option value=" Disability">Disability</ion-option>
+                <ion-option value=" Early Critical Illness">Early Critical Illness</ion-option>
+                <ion-option value=" Critical Illness">Critical Illness</ion-option>
+                <ion-option value=" Personal Accident">Personal Accident</ion-option>
+                </ion-select>
+              </ion-item>
+
+            <ion-item>
+              <ion-label class='login-fields' color='primary' stacked>Agency</ion-label>
+              <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='advisorRequest.agency' multiple="false"
+                (ionChange)='onChange(advisorRequest.agency)'>
+                <ion-option value=" Specific Agency">Specific Agency</ion-option>
+                <ion-option value=" No Preference">No Preference</ion-option>
+              </ion-select>
+    
+            </ion-item>
+
+            <ion-item *ngIf='advisorRequest.agency.includes(" Specific Agency")'>
+                <ion-label class='login-fields' color='primary' stacked>Agency Name</ion-label>
+                <ion-input required  name='agencyName' [type]='text' [(ngModel)]='advisorRequest.agencyName'></ion-input>
+              </ion-item>  
+
+
+            <ion-item>
+              <ion-label class='login-fields' color='primary' stacked>Intention</ion-label>
+              <ion-select #coverageLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='advisorRequest.intention' multiple="true" (ionChange)="onChange(advisorRequest.intention)">
+                <ion-option value=" Looking to Buy">Looking to Buy</ion-option>
+                <ion-option value=" Looking to Speak to Someone">Looking to Speak to Someone</ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-textarea #Query='ngModel' required 
+                      class='login-fields' 
+                      name='additionalComments' rows='7' placeholder='Additional Comments' 
+                      [(ngModel)]='advisorRequest.additionalComments'></ion-textarea>
+          </ion-item>
+            
+            <div margin-bottom class='button-reset-container'>
+                <button ion-button full text-center margin-top type='submit' [disabled]='!resetEmailForm.form.valid'>Submit</button>
+            </div>
+        </form>
+  
+    
+  </ion-content>

@@ -1,0 +1,206 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title class='title-center' text-uppercase>My Portfolio</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+        
+        
+
+    <!--div class='insurance'>
+        <ng-container *ngFor='let member of (firebase.familyMemberList | keys)' class = 'familyMembers'>
+                <ion-card>
+                <img src='assets/img/dummy_profilepic.png'>
+                <h2>{{member.name}}</h2>
+                </ion-card>
+        </ng-container>
+        <div text-center class='middle' *ngIf='!(firebase.familyMemberList | keys)'>
+                <ion-spinner></ion-spinner>
+                <p style='font-size:16px' text-center>You have no Family Members added.</p>
+        </div>
+    </div>-->
+    
+    <ion-toolbar>
+        <ion-segment [(ngModel)]='section' color='secondary'>    
+        <ion-segment-button value='insuranceByCoverage'>
+            My Coverage
+        </ion-segment-button>
+        <ion-segment-button value='insuranceByPolicy'>
+            My Policies
+        </ion-segment-button>
+        <ion-segment-button value='insuranceByClaim'>
+                My Claims
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+  <!--Disable this portion as of current version.    
+    <div *ngIf='section === "savingsinvestments"'>
+        <div *ngIf='(equityValue + cashValue) > 0' class='portfolioChart'>
+            <canvas baseChart
+                    [data]='portfolioChartData'
+                    [labels]='portfolioChartLabels'
+                    [chartType]='portfolioChartType'
+                    [options]='portfolioChartOptions'
+                    [colors]='portfolioChartColors'>
+            </canvas>
+            <span class='totalValue'>{{equityValue + cashValue | currency:'SGD':false:'1.0-0'}}</span>
+
+            <span *ngIf='cashPercentage <= 0.5' class='sideLabel topright'>Cash<br>{{cashPercentage * 100 | number : '1.0-0'}}%</span>
+            <span *ngIf='cashPercentage <= 0.5' class='sideLabel bottomleft'>Equity<br>{{equityPercentage * 100 | number : '1.0-0'}}%</span>
+
+            <span *ngIf='cashPercentage > 0.5' class='sideLabel bottomright'>Cash<br>{{cashPercentage * 100 | number : '1.0-0'}}%</span>
+            <span *ngIf='cashPercentage > 0.5' class='sideLabel topleft'>Equity<br>{{equityPercentage * 100 | number : '1.0-0'}}%</span>
+        </div>
+
+        <div *ngIf='(equityValue + cashValue) === 0' class='portfolioEmpty'>
+            <h3>You have no statements yet.<br>Start adding some in the "Add Statements" tab!</h3>
+        </div>
+
+        <ion-list margin-top class='portfolioChartLegend'>
+            <ion-item (click)='toggleDetailsView("savings")'>
+                <div class='portfolioLabel'>
+                    <span><div class='colorPreview cashColorPreview'></div>&emsp;Cash</span>
+                    <span *ngIf='!detailedView.savings'>{{portfolioChartData[0] | currency:'SGD':false:'1.0-0'}}</span>
+                </div>
+                <ion-grid class='accountList-table' *ngIf='firebase.accounts.savings && detailedView.savings'>
+                    <ion-row class='accountList-header'>
+                        <ion-col col-auto>Account No.</ion-col>
+                        <ion-col col-auto>Value</ion-col>
+                    </ion-row>
+                    <ion-row class='accountList-item' *ngFor='let account of firebase.accounts.savings | keys'>
+                        <ion-col col-auto>{{account}}</ion-col>
+                        <ion-col col-auto>{{firebase.accounts.savings[account].value | currency:'SGD':false:'1.0-0'}}</ion-col>
+                    </ion-row>
+                    <ion-row class='accountList-total'>
+                        <ion-col col-auto>Total</ion-col>
+                        <ion-col col-auto>{{portfolioChartData[0] | currency:'SGD':false:'1.0-0'}}</ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+            <ion-item (click)='toggleDetailsView("equity")'>
+                <div class='portfolioLabel'>
+                    <span><div class='colorPreview equityColorPreview'></div>&emsp;Equity</span>
+                    <span *ngIf='!detailedView.equity'>{{portfolioChartData[1] | currency:'SGD':false:'1.0-0'}}</span>
+                </div>
+                <ion-grid class='accountList-table' *ngIf='firebase.accounts.investments && detailedView.equity'>
+                    <ion-row class='accountList-header'>
+                        <ion-col col-auto>Account No.</ion-col>
+                        <ion-col col-auto>Value</ion-col>
+                    </ion-row>
+                    <ion-row class='accountList-item' *ngFor='let account of firebase.accounts.investments | keys'>
+                        <ion-col col-auto>{{account}}</ion-col>
+                        <ion-col col-auto>{{firebase.accounts.investments[account].value | currency:'SGD':false:'1.0-0'}}</ion-col>
+                    </ion-row>
+                    <ion-row class='accountList-total'>
+                        <ion-col col-auto>Total</ion-col>
+                        <ion-col col-auto>{{portfolioChartData[1] | currency:'SGD':false:'1.0-0'}}</ion-col>
+                    </ion-row>
+                </ion-grid> 
+            </ion-item>
+            <p>(click each item to see a detailed view)</p>
+        </ion-list>
+    </div>
+-->
+
+  <!-- View By Policy-->
+  <div *ngIf='section === "insuranceByPolicy"' class='insurance'>
+    <div class='policy-name-label' stacked>Policy Name</div>
+    <ion-label class='premium-label' stacked>Premium</ion-label>
+    <ion-list class='list-by-claims'>
+      <ion-item-sliding *ngFor='let policy of (firebase.policies | keys)'>
+        <ion-item class='policy-items' detail-push (click)='navPolicyDetailsModal(policy)'>
+          <div id='policy-name'>{{firebase.policies[policy].policyName}}</div>
+          <div id='policy-premiumDueDate'>Premium Due: {{firebase.policies[policy].premiumDueDate}}</div>
+          <div id='policy-premium'>${{firebase.policies[policy].premiumAmount | safeNumber}}</div>
+          <div id='policy-frequency'>{{firebase.policies[policy].frequency}}</div>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)='deletePolicy(policy)'>
+        <ion-icon name="trash"></ion-icon>Delete
+        </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+
+
+  <!-- View By Coverages-->
+  <div *ngIf='section === "insuranceByCoverage"' class='insurance'>
+        <div style="position: absolute; top: 0px; width: 100%; float:right">
+                <div style="text-align: center">
+                        <p>Bottom</p>
+                </div>
+        </div>
+    <div class='covered-not-covered'>At Risk For:</div>
+    <ng-container *ngFor='let coverage of (firebase.localCoverageList | keys)'>
+    <ion-card *ngIf='firebase.localCoverageList[coverage]===0' (click)='navInsuranceModal(coverage)'>
+      <img src='assets/img/{{coverage}}.png'>
+      <h2>{{coverageListTitles[coverage]}}</h2>
+      <!--Ternary operator to return Coverage and amount if policy found in accounts, return 'NOT COVERED' otherwise-->
+      <p [class]='isPresent(firebase.localCoverageList[coverage]) ? "policyPresent" : "policyAbsent"'>
+        {{(isPresent(firebase.localCoverageList[coverage]) ? ('Coverage: $' + (firebase.localCoverageList[coverage] | safeNumber))
+        : 'NOT COVERED')}}</p>
+    </ion-card>
+    </ng-container>
+
+    <div class='covered-not-covered'>Covered:</div>
+    <ng-container *ngFor='let coverage of (firebase.localCoverageList | keys)'>
+    <ion-card *ngIf='firebase.localCoverageList[coverage]>0' (click)='navInsuranceModal(coverage)'>
+      <img src='assets/img/{{coverage}}.png'>
+      <h2>{{coverageListTitles[coverage]}}</h2>
+      <!--Ternary operator to return Coverage and amount if policy found in accounts, return 'NOT COVERED' otherwise-->
+      <p [class]='isPresent(firebase.localCoverageList[coverage]) ? "policyPresent" : "policyAbsent"'>
+        {{(isPresent(firebase.localCoverageList[coverage]) ? ('Coverage: $' + (firebase.localCoverageList[coverage] | safeNumber))
+        : 'NOT COVERED')}}</p>
+    </ion-card>
+    </ng-container>
+
+    <div text-center class='middle' *ngIf='!(firebase.localCoverageList | keys)'>
+      <ion-spinner></ion-spinner>
+      <p style='font-size:16px' text-center>Loading...</p>
+    </div>
+  </div>
+
+<!-- View By Claims-->
+ <div *ngIf='section === "insuranceByClaim"' class='insurance'>
+        <div class='policy-name-label' stacked>Claims</div>
+        <ion-label class='premium-label' stacked>Status</ion-label>
+        <ion-list class='list-by-claims'>
+          <ion-item-sliding *ngFor='let claim of (firebase.claim | keys)'>
+            <ion-item class='claim-items' detail-push (click)='navClaimDetailsModal(claim)'>
+                <div>
+              <div id='claim-name-incident'>Type of Loss: {{firebase.claim[claim].typeOfLoss}}</div>
+              <div id='claim-name-incident'>Policy to Claim: {{firebase.claim[claim].policyToClaim}}</div>
+              <div id='claim-date'>{{firebase.claim[claim].timestamp | date:'shortDate'}},  {{firebase.claim[claim].timestamp | date:'H:mm'}}</div>
+            </div> 
+              <!-- <div text-right id='claim-status-image'><img class='claimImageSize' height="15 px" width="50 px" src='assets/img/{{claims.status}}.png'></div> -->
+              <div id='{{firebase.claim[claim].status}}' item-right>
+                  <span>{{firebase.claim[claim].status}}</span>
+                </div>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="danger" (click)='deleteClaim(claim)'>
+            <ion-icon name="trash"></ion-icon>Delete
+            </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+
+<ion-fab *ngIf='!(section === "insuranceByClaim")' right bottom>
+    <button ion-fab mini (click)= navAddPolicyPage()>
+        <ion-icon name="add"></ion-icon>
+    </button>
+</ion-fab>
+
+<ion-fab *ngIf='section === "insuranceByClaim"' right bottom>
+    <button ion-fab mini (click)= navClaimPage()>
+        <ion-icon name="add"></ion-icon>
+    </button>
+</ion-fab>
+
+
+</ion-content> 

@@ -1,0 +1,57 @@
+<ion-content class='login-container'>
+  <!--Use novalidate on the form to suppress validation. Should standardise in the future.-->
+  <div class='login-banner' text-center padding-bottom>
+    <img src='assets/img/logo-beta.png'>
+  </div>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]='formType' color='secondary'>
+      <ion-segment-button value='login'>
+        Login
+      </ion-segment-button>
+      <ion-segment-button value='signup'>
+        Sign Up
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <!--Use novalidate to avoid default form validation.-->
+  <form (ngSubmit)='submitForm()' #landingForm='ngForm' novalidate>
+    <ion-item *ngIf="formType ==='signup'" padding-right>
+      <ion-label floating>Name</ion-label>
+      <ion-input required class='login-fields' name='name' [type]='string' [(ngModel)]='input.name'></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formType ==='signup'" padding-right>
+      <ion-label floating>Age</ion-label>
+      <ion-input #input.age='ngModel' required class='login-fields' [ngModelOptions]="{standalone: true}" inputmode='numeric' min="0" type='number' pattern="[0-9]*" [(ngModel)]='input.age'></ion-input>
+    </ion-item>
+    <ion-item *ngIf="formType ==='signup'" padding-right>
+      <ion-label floating>Occupation</ion-label>
+      <ion-input required class='login-fields' name='name' [type]='string' [(ngModel)]='input.occupation'></ion-input>
+    </ion-item>
+    <ion-item padding-right>
+      <ion-label floating>Email</ion-label>
+      <ion-input #emailField required class='login-fields' name='email' type='email' [(ngModel)]='input.email'></ion-input>
+    </ion-item>
+
+    <ion-item padding-right>
+      <ion-label floating>Password</ion-label>
+      <ion-input required class='login-fields' name='password' [type]='passwordFieldType' [(ngModel)]='input.password'></ion-input>
+      <!--touchstart and touchend events work on mobile only-->
+      <!--<button ion-button icon-only clear color='dark' item-right class='peek-button' type='button' (touchstart)='togglePasswordHide()'
+        (touchend)='togglePasswordHide()'>
+                <ion-icon [name]='peekIcon'></ion-icon>
+            </button>-->
+    </ion-item>
+    
+    <button *ngIf="formType === 'login'" class="forgot-password" type=button (click)="forgotPassword()">Forgot Password?</button>
+    <button ion-button class='button-login button-wide' text-center margin-top type='submit' *ngIf='formType === "login"' [disabled]='!landingForm.form.valid'>Log In</button>
+    <button ion-button class='button-login button-wide' text-center margin-top type='submit' *ngIf='formType === "signup"' [disabled]='!landingForm.form.valid'>Sign Up</button>
+  </form>
+
+  
+<!--  <button class="create-account">Create an account here</button>-->
+
+  <ion-footer id='loginFooter' class='login-footer' text-center>
+  </ion-footer>
+</ion-content>

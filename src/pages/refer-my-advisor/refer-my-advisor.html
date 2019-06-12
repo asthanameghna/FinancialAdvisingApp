@@ -1,0 +1,52 @@
+<!--
+  Generated template for the Refer My Advisor page.
+  Refer to adv
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons>
+            <button ion-button color='light' class='navbar-textbutton' clear small (click)='dismiss()'><strong>Back</strong>
+            </button>
+        </ion-buttons>
+      <ion-title class='title-center' text-uppercase>REFER MY ADVISOR</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+    <ion-content class="center" padding>
+
+        <p padding-horizontal class='top-label-text'>
+            Refer your advisor to us to avoid the hassle of uploading the policies yourself!<br>
+          </p>
+    
+    <form (ngSubmit)='sendReferMyAdvisorEmail()' #resetEmailForm='ngForm' novalidate>
+            <ion-item>
+                    <ion-label floating>Advisor's Name</ion-label>
+                    <ion-input required class='login-fields' name='name' [type]='text' [(ngModel)]='referredAdvisor.name'></ion-input>
+                  </ion-item>    
+
+            <ion-item>
+                    <ion-label floating>Contact Number</ion-label>
+                    <ion-input required class='login-fields' name='contactNumber' [type]='number' [(ngModel)]='referredAdvisor.contactNumber'></ion-input>
+                  </ion-item>
+
+            <ion-item>
+                   <ion-label floating>Email</ion-label>
+                   <ion-input required class='login-fields' name='email' [type]='email' [(ngModel)]='referredAdvisor.email'></ion-input>
+                  </ion-item>      
+
+            <ion-item>
+                    <ion-label floating>Agency</ion-label>
+                    <ion-input required class='login-fields' name='agency' [type]='text' [(ngModel)]='referredAdvisor.agency'></ion-input>
+                   </ion-item>           
+                  
+                  <div margin-bottom class='button-reset-container'>
+                      <button ion-button full text-center margin-top type='submit' [disabled]='!resetEmailForm.form.valid'>Submit</button>
+                  </div>
+              </form>
+        
+          
+        </ion-content>

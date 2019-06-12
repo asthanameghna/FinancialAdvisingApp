@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button color='light' class='navbar-textbutton' clear small (click)='returntoprofile()'><strong>Cancel</strong>
+      </button>
+    </ion-buttons>
+    <ion-title class='title-center' text-uppercase>Edit Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+ 
+    
+            <form (ngSubmit)='updateProfile()' #updateProfileForm='ngForm' novalidate>
+                <ion-label color='primary' stacked>Edit Name</ion-label>
+                <ion-item>
+                    <ion-input #nameField='ngModel' 
+                            class='profile-fields' 
+                            name='newname' type='text' placeholder='New Name' 
+                            [(ngModel)]='profile.name' [ngModelOptions]='{standalone: true}'></ion-input>
+                </ion-item>
+                <ion-label color='primary' stacked>Edit Phone Number</ion-label>
+                <ion-item>
+                    <ion-input #numberField='ngModel' 
+                            class='profile-fields' 
+                            name='newnumber' type='number' placeholder='New Phone Number' 
+                            [(ngModel)]='profile.phone' [ngModelOptions]='{standalone: true}'></ion-input>
+                </ion-item>
+                <ion-label color='primary' stacked>Edit Occupation</ion-label>
+                <ion-item>
+                    <ion-input #occupationField='ngModel' 
+                            class='profile-fields' 
+                            name='newoccupation' type='text' placeholder='New Occupation' 
+                            [(ngModel)]='profile.occupation' [ngModelOptions]='{standalone: true}'></ion-input>
+                </ion-item>
+                <ion-label color='primary' stacked>Edit Secondary (Work) Email Address</ion-label>
+                <ion-item>
+                    <ion-input #secondaryEmailField='ngModel' 
+                            class='profile-fields' 
+                            name='newsecondaryemail' type='email' placeholder='New Secondary Email' 
+                            [(ngModel)]='profile.secondaryEmail' [ngModelOptions]='{standalone: true}'></ion-input>
+                </ion-item>
+                <ion-label color='primary' stacked>Company</ion-label>
+                <ion-item>
+                    <ion-input #companyField='ngModel' 
+                            class='profile-fields' 
+                            name='newcompany' type='text' placeholder='New Company' 
+                            [(ngModel)]='profile.company' [ngModelOptions]='{standalone: true}'></ion-input>
+                </ion-item>
+                
+                <ion-label color='primary' stacked>Gender</ion-label>
+                <ion-item>
+                  <ion-select #genderLists='ngModel' [ngModelOptions]='{standalone: true}' [(ngModel)]='profile.gender' multiple="false"
+                    >
+                    <ion-option value="male">Male</ion-option>
+                    <ion-option value="female">Female</ion-option>
+                    <ion-option value="other">Other</ion-option>
+                </ion-select>
+                </ion-item>
+                <ion-label color='primary' stacked>Date Of Birth</ion-label>
+                <ion-item>
+                    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="profile.dob" [ngModelOptions]='{standalone: true}'></ion-datetime>
+                </ion-item>
+                
+                <div margin-bottom class='button-reset-container'>
+                    <button ion-button class='button-reset' text-center margin-top type='submit' [disabled]='!updateProfileForm.form.valid'>Update Profile</button>
+                </div>
+            </form>
+            <!--<button ion-button class='button-reset' text-center margin-top type='submit'(click)=  selectPhotoSource()>Change Profile Picture</button>-->
+
+</ion-content>

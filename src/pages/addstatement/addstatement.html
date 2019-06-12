@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar primary id='uploadNavbar'>
+    <ion-buttons>
+        <button ion-button color='light' class='navbar-textbutton' clear small (click)='dismiss()'><strong>Back</strong>
+        </button>
+    </ion-buttons>
+    <ion-title class='title-center' text-uppercase>New Statement</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content overflow-scroll='true'>
+  <div class='upload-form-container' *ngIf='!uploadToggle'>
+    <form (ngSubmit)='uploadStatement()' #statementForm='ngForm'>
+          <button ion-button outline icon-left color="primary" id="photoButton" type="button" (click)="selectPhotoSource()" *ngIf="images.length > 0">
+                  <ion-icon name="md-add-circle" color="primary"></ion-icon>
+                  Add more photo
+                </button>
+                <div class="instructions" *ngIf='images.length > 0'>
+                  <ul class='ul'>
+                  Click on image to view<br>
+                  Press & hold image to delete<br>
+                  <hr>
+                  Make sure that your photos contain the following information: <br><br>
+                  - Policy Name, Policy Number<br>
+                  - Insured Person, Beneficiary (if any)<br>
+                  - Inception Date, Expiry Date<br>
+                  - Premium Amount, Frequency of Payment<br>
+                  - Coverage Details and Amount<br>
+                  </ul>
+            
+                </div>
+                <div class='upload-photos-blank' *ngIf='images.length === 0'>
+                      <button ion-button outline icon-left color="danger" id="add-statement-button" type="button" (click)="invokeActionSheet()">
+                      <ion-icon name="md-add-circle" color="primary"></ion-icon>
+                      Add New Statement
+                      </button>
+                  </div>
+                  <div *ngIf='images.length > 0'>
+                    <button ion-button outline icon-left color="danger" id="photoButton" type="button" (click)="uploadStatement()" *ngIf="images.length > 0">
+                    <ion-icon name="md-cloud-upload" color="danger"></ion-icon>
+                    Upload Statement
+                  </button>
+                  </div>
+              
+                  <br><br>
+              
+              
+                <div class='upload-progress-container' text-center *ngIf='uploadToggle'>
+                  <h3>{{uploadTitle}}</h3>
+                  <progress-bar [progress]='uploadProgressPercentage'></progress-bar>
+                </div>
+              

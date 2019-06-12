@@ -1,0 +1,47 @@
+page-intro {
+    div.swiper-pagination { top:0; bottom:inherit; }
+
+    #logo {
+        width: 8.5em;
+    }
+    .slogan {
+        position: relative;
+        bottom: 1.8em;
+        font-size: 1em;
+    }
+    img {
+        position: relative;
+        bottom: 4em;
+    }
+    .header {
+        position: relative;
+        bottom: 3.2em;
+        font-size: 115%;
+    }
+    .content {
+        position: relative;
+        bottom: 2em;
+    }
+    .header-page2 {
+        position: relative;
+        bottom: 6.5em;
+        font-size: 115%;
+    }
+    .content-page2 {
+        position: relative;
+        bottom: 5em;
+    }
+    .lets-get-started {
+        position: relative;
+        bottom: 3em;
+        padding: 20px 50px;
+    }
+    #login {
+        font-size: 1em;
+        bottom: 0.35em;
+        right: 0.35em;
+    }
+    #footer-content {
+        font-size: 0.8em;
+    }
+}

@@ -1,0 +1,33 @@
+page-claim {
+    form ion-list {
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    form ion-list ion-list-header {
+        border: 0 !important;
+    }
+
+    .middle {
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        text-align: center;
+    }
+
+    .range .item-inner {
+        border-bottom: 0 !important;
+    }
+
+    .range-label {
+        font-size: 1.2em;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 0.55px solid #c8c7cc;
+    }
+    .top-label-text {
+        text-align: center;
+    }
+}

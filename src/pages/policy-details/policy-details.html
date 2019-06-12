@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button color='light' class='navbar-textbutton' clear small (click)='dismiss()'><strong>Back</strong>
+      </button>
+    </ion-buttons>
+    <ion-title class='title-center' text-uppercase>My Policy Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-card class='card' no-padding>
+        <button class='edit-policy-button' ion-button clear icon-left (click)='openEditModal()'>
+          <ion-icon name='md-create'></ion-icon>
+        </button>
+        <ion-card-header class='policy-title'>POLICY NAME</ion-card-header>
+        <ion-card-content class='policy-name-content'>{{firebase.policies[policy].policyName}}
+          <div class='policy-number'>{{firebase.policies[policy].policyNumber}}</div></ion-card-content>
+      </ion-card>
+      
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class='left-card'>
+          <ion-card-header class='policy-title'>INSURER COMPANY</ion-card-header>
+          <ion-card-content>{{firebase.policies[policy].insurerCompany}}</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class='right-card'>
+          <ion-card-header class='policy-title'>ADVISOR</ion-card-header>
+          <ion-card-content>{{firebase.policies[policy].advisorName}}
+            <div class='contact-number' *ngIf="firebase.policies[policy].advisorContact"><ion-icon name="md-call" id="telephone-icon"></ion-icon>{{firebase.policies[policy].advisorContact}}</div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class='left-card'>
+          <ion-card-header class='policy-title'>PREMIUM</ion-card-header>
+          <ion-card-content>${{firebase.policies[policy].premiumAmount | safeNumber}}</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class='right-card'>
+          <ion-card-header class='policy-title'>FREQUENCY</ion-card-header>
+          <ion-card-content>{{firebase.policies[policy].frequency}}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card class='left-card'>
+          <ion-card-header class='policy-title'>COVERAGE TYPE</ion-card-header>
+          <ion-list>
+            <ion-item *ngFor='let cov of (firebase.policies[policy].coverage | keys)' id='coverage-text'>
+              {{coverageListTitles[cov]}}</ion-item>
+          </ion-list>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class='right-card'>
+          <ion-card-header class='policy-title'>COVERAGE AMOUNT</ion-card-header>
+          <ion-list>
+            <ion-item *ngFor='let cov of (firebase.policies[policy].coverage | keys)' id='coverage-text'>${{firebase.policies[policy].coverage[cov] | safeNumber}}</ion-item>
+          </ion-list>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class='left-card'>
+          <ion-card-header class='policy-title'>INCEPTION DATE</ion-card-header>
+          <ion-card-content>{{firebase.policies[policy].policyTermFrom}}</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class='right-card'>
+          <ion-card-header class='policy-title'>END DATE</ion-card-header>
+          <ion-card-content>{{firebase.policies[policy].policyTermTo}}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class='left-card'>
+          <ion-card-header class='policy-title'>INSURED PERSON</ion-card-header>
+          <ion-card-content>{{firebase.policies[policy].insuredPerson}}</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class='right-card'>
+          <ion-card-header class='policy-title'>BENEFICIARY</ion-card-header>
+          <ion-card-content>{{firebase.policies[policy].beneficiary}}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-card class='card'>
+        <ion-card-header class='policy-title'>MODE OF PAYMENT</ion-card-header>
+        <ion-card-content>{{firebase.policies[policy].modeOfPayment}}</ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-row>  
+      <ion-card class='card'>
+        <ion-card-header class='policy-title'>ADDITIONAL NOTES</ion-card-header>
+        <ion-card-content>{{firebase.policies[policy].additionalNotes}}</ion-card-content>
+      </ion-card>  
+    </ion-row>
+    <div id='photo-attachment-line'>Your photo attachments:</div>
+    <ion-row>
+      <ion-col col-4 *ngFor='let photo of (firebase.policies[policy].photos | keys)'>
+        <div id="frame">
+          <div id="div">
+            <img [src]='firebase.policies[policy].photos[photo]' class='photos' imageViewer/>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

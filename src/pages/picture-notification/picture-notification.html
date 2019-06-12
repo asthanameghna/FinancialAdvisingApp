@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar primary id='uploadNavbar'>
+    <ion-title class='title-center' text-uppercase>Your Policy Pictures</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content overflow-scroll='true'>
+  <br>
+  <h6>Pictures uploaded on {{notification.timestamp | date:'shortDate'}} at {{notification.timestamp | date:'H:mm'}}</h6>
+  <br>
+    <div class='upload-photos'>
+      <ion-grid>
+        <ion-row align-items-center>
+          <div text-center class='middle' *ngIf='!(notification.photos)'>
+            <ion-spinner></ion-spinner>
+            <p style='font-size:16px' text-center>Loading...</p>
+          </div>
+          <ion-col col-4 *ngFor="let i of notification.photos | keys">
+            <div class="frame">
+              <div class="crop">
+                <img [src]='notification.photos[i]' class="photos" imageViewer/>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  <br>  
+  <h6>Please give us up to 24hrs to process your policy pictures.</h6>
+</ion-content>

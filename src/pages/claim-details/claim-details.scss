@@ -1,0 +1,64 @@
+page-claim-details {
+    .edit-claim-button {
+        float: right;
+        font-size: 0.9em;
+    }
+    .card {
+        width: 91vw;
+        overflow: visible;
+        margin-right: -0.75em;
+        margin-left: 0;
+    }
+    .claim-title {
+        font-size: 0.8em;
+        color: grey;
+    }
+    .claim-name-content {
+        font-size: 1.5em;
+        font-weight: bold;
+
+    }
+    .left-card {
+        //display: inline-block;
+        height:105%;
+        width:99%;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 1%;
+    }
+    .center-card{
+            //display: inline-block;
+            height:100%;
+            width:101%;
+            margin-top: 0;
+            margin-right: 0.25em;
+            margin-left: 2px;
+    }
+    ion-label {
+        word-break: break-word;
+        white-space:normal;
+    }
+    .right-card {
+        //display: inline-block;
+        height:105%;    
+        width: 99%;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 0.5%;
+        
+    }
+    #frame {
+        background: #fff;
+        display: inline-block;
+        vertical-align: top;
+        width: 7em;
+        height: 7em;
+        margin-right: .3em;
+        margin-bottom: .3em;
+    }
+    #div {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }  
+}

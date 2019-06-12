@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-navbar>
+      <ion-buttons>
+        <button ion-button color='light' class='navbar-textbutton' clear small (click)='dismiss()'><strong>Back</strong>
+        </button>
+      </ion-buttons>
+      <ion-title class='title-center' text-uppercase>My Claim Details</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+
+      <!-- <div class='policy-name-label' stacked>Claims</div>
+      <ion-list class='list-by-claims'>
+        <ion-item>
+              <div>
+            <div id='claim-name-incident'>Incident: {{claim.$key}}</div>
+            <div id='claim-name-incident'>Incident: {{claim.describeIncident}}</div>
+            <div id='claim-date'>Date and time: {{claim.timestamp | date:'shortDate'}}, {{claim.timestamp | date:'H:mm'}}</div>
+          </div> 
+            <div text-right id='claim-status-image'><img class='claimImageSize' height="15 px" width="50 px" src='assets/img/{{claims.status}}.png'></div>
+            <div id='{{claim.status}}'>
+                <span>{{claim.status}}</span>
+              </div>
+        </ion-item>
+      </ion-list> -->
+
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-card class='card' no-padding>
+          <button class='edit-claim-button' ion-button clear icon-left (click)='openEditModal()'>
+            <ion-icon name='md-create'></ion-icon>
+          </button>
+          <ion-card-header class='claim-title'>POLICY TO CLAIM</ion-card-header>
+          <ion-card-content class='claim-name-content'>{{firebase.claim[claim].policyToClaim}}</ion-card-content>
+        </ion-card>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card class='left-card'>
+            <ion-card-header class='claim-title'>COUNTRY OF INCIDENT</ion-card-header>
+            <ion-card-content>{{firebase.claim[claim].countryOfIncident}}</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card class='right-card'>
+            <ion-card-header class='claim-title'>CITY OF INCIDENT</ion-card-header>
+            <ion-card-content>{{firebase.claim[claim].cityOfIncident}}</ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card class='left-card'>
+            <ion-card-header class='claim-title'>DATE OF INCIDENT</ion-card-header>
+            <ion-card-content>{{firebase.claim[claim].dateOfIncident}}</ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col>
+          <ion-card class='right-card'>
+            <ion-card-header class='claim-title'>CLAIM STATUS</ion-card-header>
+            <ion-card-content>{{firebase.claim[claim].status}}</ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card class='card' no-padding>
+            <ion-card-header class='claim-title'>DECRIPTION OF INCIDENT</ion-card-header>
+            <ion-card-content>{{firebase.claim[claim].describeIncident}}</ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-card class='card' no-padding>
+            <ion-card-header class='claim-title'>TYPE OF LOSS</ion-card-header>
+            <ion-card-content>{{firebase.claim[claim].typeOfLoss}}</ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </ion-content>
+  

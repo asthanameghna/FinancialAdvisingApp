@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title class='title-center' text-uppercase>Settings</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+        <button ion-item (click)=' navChangeEmailPage()'>
+        <ion-icon item-left name='at'></ion-icon>
+            Change Email      
+         </button>
+         <button ion-item (click)=' navChangePasswordPage()'>
+        <ion-icon item-left name='lock'></ion-icon>
+            Change Password      
+         </button>
+        <button ion-item (click)='navContactSupportPage()'>
+            <ion-icon item-left name='mail'></ion-icon>
+            Contact Support via Email
+        </button>
+        <button ion-item (click)='navTncPage()'>
+            <ion-icon item-left name='clipboard'></ion-icon>
+            Terms and Conditions
+        </button>
+        <button ion-item (click)='navPrivacyPolicyPage()'>
+            <ion-icon item-left name='md-key'></ion-icon>
+            Privacy Policy
+        </button>
+        <button ion-item (click)='logout()'>
+            <ion-icon item-left name='exit'></ion-icon>
+            Logout
+        </button>
+
+</ion-content>
+
+

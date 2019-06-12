@@ -1,0 +1,7 @@
+<ion-content>
+  <div text-center>
+    <img class='landing-image' src='assets/img/logo-beta.png' width='50%'>
+    <h2 class='loading-message'>{{message}}</h2>
+    <button ion-button round *ngIf='cycleCount > 2' (click)='logout()'>Log Out</button>
+  </div>
+</ion-content>

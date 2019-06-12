@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+     <ion-buttons>
+      <button ion-button color='light' class='navbar-textbutton' clear small (click)='dismiss()'><strong>Back</strong>
+      </button>
+    </ion-buttons>
+    <ion-title class='title-center' text-uppercase>{{coverageListTitles[this.policy]}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <p class='flavor' padding-horizontal text-center>{{flavorText[this.policy]}}</p>
+  <br>
+   
+  <ion-list>
+    <ion-item detail-push *ngFor="let pol of firebase.localCoverageListbyPolicies[this.policy]" class="policies" (click)="navPolicyDetails(pol)">
+      
+      
+      <div id='policy-name'>{{firebase.policies[pol].policyName}}</div>
+      <div id='policy-insuredPerson'>Insured: {{firebase.policies[pol].insuredPerson}}</div>
+      <ion-note item-right id='policy-amount'>${{firebase.policies[pol].coverage[this.policy] | safeNumber}}</ion-note>
+         
+    </ion-item>
+    <!--<ion-item>
+            Target Coverage
+            <ion-note item-right>To Be Implemented</ion-note>
+        </ion-item>-->
+  
+  <ion-item class="your-coverage">
+      Total Coverage
+      <ion-note item-right>{{(isPresent(firebase.localCoverageList[this.policy]) ? ('$' + (firebase.localCoverageList[this.policy] | safeNumber))
+        : 'NOT COVERED')}}</ion-note>
+  </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf = '(notCoveredFamilyMemberList | async)?.length > 0'>
+    <ion-list-header class='premium-label'> People in your family yet to be covered </ion-list-header>
+    <ion-item *ngFor="let member of (notCoveredFamilyMemberList | async)" class="policies">
+        <div id='policy-name'>{{member.name}}</div>           
+    </ion-item>
+
+  </ion-list>
+  <!--
+  <ion-list class='policyDetails'>
+    <ion-list-header>Policy Details</ion-list-header>
+
+    <ion-item style="text-align:center;">
+      COVERAGE-O-METER
+    </ion-item>
+-->
+  <!--        
+        <ion-item>
+            Premium Term
+            <ion-note item-right>{{firebase.accounts.insurance[policy.$key].premiumTerm}} years</ion-note>
+        </ion-item>
+        <ion-item>
+            Policy Term
+            <ion-note item-right>{{firebase.accounts.insurance[policy.$key].policyTerm}} years</ion-note>
+        </ion-item>
+        <ion-item>
+            Inception Date
+            <ion-note item-right>{{firebase.accounts.insurance[policy.$key].inceptionDate}}</ion-note>
+        </ion-item>
+
+  </ion-list>
+-->
+  <div *ngIf="firebase.localCoverageList[this.policy] !== 0">
+  <button ion-button text-center full margin-top class="get-covered-button" (click)="getCovered()">Claim Inquiry</button>
+  </div>
+  <div>
+    <br/>
+      <div text-center full margin-top class="get-covered-button">Popular Plans are coming soon!</div>
+  </div>
+</ion-content>

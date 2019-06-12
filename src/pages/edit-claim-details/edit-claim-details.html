@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons>
+            <button ion-button color='light' class='navbar-textbutton' clear small (click)='dismissPage()'><strong>Back</strong>
+            </button>
+          </ion-buttons>
+      <ion-title class='title-center' text-uppercase>Claim Form</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+<p padding-horizontal class='top-label-text'>Find out if you can make a successful claim by filling out the form below.<br>We take on average 4 - 8 hours to verify your case with our partner advisors.</p>      
+
+<form (ngSubmit)='submitForm()' #resetClaimForm='ngForm' margin-vertical novalidate>
+  <ion-item>
+      <ion-label class='profile-label' color='primary' stacked>Policy To Claim</ion-label>
+      <ion-select #policyToClaim='ngModel' required class='profile-input' name='policyToClaim' [(ngModel)]='claim.policyToClaim' (ionChange)='onSelectChange(claim.policyToClaim)'>
+        <ion-option value="addPolicy">Add a policy to find out</ion-option>
+        <ion-option *ngFor="let policy of (firebase.policies | keys)" value="{{firebase.policies[policy].policyName}}">{{firebase.policies[policy].policyName}}</ion-option>
+        <ion-option value="Unknown">Unknown</ion-option>
+      </ion-select>
+  </ion-item>
+
+
+<ion-item>
+      <ion-label class='profile-label' color='primary' stacked>Country of Incident</ion-label>
+        <ion-input #countryOfIncident='ngModel' required class='profile-input' name='countryOfIncident' type='text' [(ngModel)]='claim.countryOfIncident'></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label class='profile-label' color='primary' stacked>City of Incident</ion-label>
+        <ion-input #cityOfIncident='ngModel' required class='profile-input' name='cityOfIncident' type='text' [(ngModel)]='claim.cityOfIncident'></ion-input>
+      </ion-item>
+                            
+    <ion-item>
+      <ion-label class='profile-label' color='primary' stacked>Date of Incident</ion-label>
+      <ion-input #dateOfIncident='ngModel' required class='profile-input' name='dateOfIncident' type='date' [(ngModel)]='claim.dateOfIncident' value='claim.dateOfIncident'></ion-input>
+    </ion-item>
+
+    <ion-item id="additional-notes-item">
+      <ion-label class='profile-label' color='primary' stacked>Description of Incident</ion-label>
+      <ion-textarea rows="5" #describeIncident='ngModel' name='describeIncident' type='text' [(ngModel)]='claim.describeIncident'
+          placeholder="Please explain what happened" required></ion-textarea>
+    </ion-item> 
+    
+    <ion-item id="additional-notes-item">
+        <ion-label class='profile-label' color='primary' stacked>Type of Loss</ion-label>
+        <ion-textarea rows="5" #typeOfLoss='ngModel' name='typeOfLoss' type='text' [(ngModel)]='claim.typeOfLoss'
+            placeholder="Please explain your loss" required></ion-textarea>
+    </ion-item> 
+
+    <ion-item id="additional-notes-item">
+        <ion-label class='profile-label' color='primary' stacked>Claim Status</ion-label>
+        <ion-select #typeOfLoss='ngModel' name='status' type='text' [(ngModel)]='claim.status'
+            placeholder="Please explain your loss" required>
+          <ion-option value="Enquired">Enquired</ion-option>
+          <ion-option value="Applied">Applied</ion-option>
+          <ion-option value="Approved">Approved</ion-option>
+          </ion-select>
+    </ion-item> 
+      
+<button ion-button text-center full margin-top type='submit'>Submit</button>
+</form>

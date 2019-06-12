@@ -1,0 +1,29 @@
+page-loading {
+    .scroll-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center
+    }
+
+    @keyframes fade {
+        0%   {opacity: 0.3;}
+        50%  {opacity: 1;}
+        100% {opacity: 0.3;}
+    }
+
+    .loading-message {
+        color: #283446;
+        animation-name: fade;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        margin-top: 20%;
+        margin-bottom: 10%;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .landing-image {
+        margin-bottom: 20px;
+        margin-top: 25%;
+    }
+}

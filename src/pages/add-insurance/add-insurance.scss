@@ -1,0 +1,134 @@
+page-add-insurance {
+    div.swiper-pagination { top:0; bottom:inherit; }
+    #previous-selection {
+        text-align: left;
+        font-size: 1em;
+        margin-left: 0.6em;
+    }
+    #previous-selection-item {
+        text-align: left;
+        font-size: 0.85em;
+        margin-left: 0.6em;
+    }
+    form {
+        ion-slide {
+            padding-top:1.2em;
+        }
+        #photoButton {
+            display: block;
+            margin: auto;
+            text-align: center;
+            margin-top:1.2em;
+            margin-bottom: 1.2em;
+        }
+
+        #additional-notes-item {
+            display: inline-block;
+        }
+        #additional-notes-textarea {
+            display: inline-block;
+        }
+        .photo-toolbar {
+            font-size: 1.2em;
+        }
+
+        /*
+        .photo-display {
+            width: 50%;
+            height: 50%;
+        }*/
+        
+        ion-toolbar.photo-toolbar .toolbar-content ion-buttons {
+        width: 100%;
+        }
+
+        ion-toolbar.photo-toolbar > ion-buttons.bar-buttons {
+            width: 33.3333%;
+            margin: 0;
+        }
+
+        ion-toolbar.photo-toolbar div.toolbar-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-grow: 2;
+        }
+
+        ion-toolbar.photo-toolbar div.toolbar-content ion-buttons {
+            order: 1;
+        }
+
+        ion-toolbar.photo-toolbar div.toolbar-content ion-label {
+            min-width: 50%;
+            text-align: center;
+            margin: 0;
+            order: 2;
+        }
+
+        ion-toolbar.photo-toolbar button ion-icon {
+            font-size: 2em;
+        }
+
+        .toolbar-slideback {
+            background-color: transparent;
+            margin-left: 5%;
+            margin-right: 10%;
+        }
+
+        .toolbar-slideforward {
+            background-color: transparent;
+            margin-left: 10%;
+        }
+
+        .toolbar-addphoto {
+            background-color: transparent;
+            margin-right: 5%;
+            margin-left: 10%;
+        }
+
+        .toolbar-addphoto .button-inner ion-icon {
+            font-weight: bold;
+        }
+
+        .toolbar-deletephoto {
+            background-color: transparent;
+            margin-right: 10%;
+        }
+        .coverage-icons {
+            float:left;
+            margin-right: 0.5em;
+            width: 10%;
+        }
+        .upload-photos-blank {
+            position: relative;
+            top: 0.5em;
+        }
+        .frame {
+        background: #fff;
+        display: inline-block;
+        vertical-align: top;
+        width: 5.5em;
+        height: 5.5em;
+        margin-right: .3em;
+        margin-bottom: .3em;
+        }
+        
+        .crop {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+
+        }
+        .photos {
+            display: block;
+            min-width: 100%;
+            min-height: 100%;
+            margin: auto;
+            position: absolute;
+            top: -100%;
+            right: -100%;
+            bottom: -100%;
+            left: -100%;
+        }
+    }
+}

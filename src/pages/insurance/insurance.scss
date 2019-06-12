@@ -1,0 +1,76 @@
+page-insurance {
+    .flavor {
+        font-size: 1.08em;
+    }
+    
+    ion-note {
+        color: color($colors, secondary) !important;
+    }
+
+    ion-list-header ion-label ion-button{
+        color: color($colors, secondary) !important;
+    }
+
+    .policyDetails {
+        margin-top: 2rem;
+    }
+    .get-covered-button {
+        position:relative;
+        top: 10em;
+        text-align: center;
+    }
+    .policies {
+        font-size: 1em;
+        padding: 0.2em;
+    }
+    .your-coverage {
+        position:relative;
+        top: 9em;
+    }
+
+    .policy-name-label {
+        position: relative;
+        font-family: 'Fira Sans';
+        margin-top: -1.2em;
+        margin-bottom: -1.2em;
+        font-size: 0.85em;
+        text-align: left;
+        font-weight: bold;
+        top: 1.25em;
+        left: 2em;
+        color: color($colors, secondary) !important;
+    }
+    .premium-label {
+        font-family: 'Fira Sans';
+        margin-top: -1.2em;
+        margin-bottom: -1.2em;
+        font-size: 0.85em;
+        font-weight: bold;
+        padding-top: 1.2em;
+        text-align: left;
+        margin-right: 3.6em;
+    }
+    #policy-name {
+        position: absolute;
+        padding-left: 1.3em;
+        top: 1em;
+        word-break: break-word;
+        white-space:normal;
+        display:block;
+        float: left;
+        width: 70%;
+        font-size: 85%;
+        
+    }
+    #policy-insuredPerson {
+        position: absolute;
+        padding-left: 1.65em;
+        top:3em;
+        padding-top: 0.1em;
+        color: #898b8e; //change to darker 
+        //color: #66686b;
+        display:block;
+        float: left;
+        font-size: 70%;
+    }
+}

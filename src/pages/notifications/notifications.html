@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class='title-center' text-uppercase>Alerts</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content #content>
+   <div text-center class='middle' *ngIf='!(sortedNotifications | async)'>
+      <ion-spinner></ion-spinner>
+      <p style='font-size:16px' text-center>Loading...</p>
+    </div>
+    <p class='middle' style='font-size:16px' *ngIf='(sortedNotifications | async)?.length === 0' text-center>No notifications here...yet.</p>
+    <ion-list class='list-by-policies'*ngIf='(sortedNotifications | async)?.length > 0'>
+      <ion-item-sliding class='statement-card' *ngFor='let notification of (sortedNotifications | async)?.reverse()'>
+          <ion-item class='policy-items' detail-push (click)='navToRightPlace(notification)' >
+            <div id='policy-name'>{{notification.message}}</div>  
+            <div *ngIf="(notification.policyName != '')" id='policy-premiumDueDate'> Policy Name: {{notification.policyName}}</div>
+            <div id='policy-premium'>{{notification.timestamp | date:'shortDate'}}</div>
+            <div id='policy-frequency'>{{notification.timestamp | date:'H:mm'}}</div>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button color="danger" (click)='deleteNotification(notification)'>
+              <ion-icon name="trash"></ion-icon>
+              Delete
+            </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+</ion-content>

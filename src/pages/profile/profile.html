@@ -1,0 +1,35 @@
+<!--
+  Generated template for the Profile page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class='title-center' text-uppercase>MY PROFILE</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="center" padding>
+
+    <button ion-item (click)=' navBasicInfoPage()'>
+        My Basic Information     
+    </button>
+    <button ion-item (click)=' navFamilyMembersPage()'>
+        Family Members      
+    </button>
+    <button ion-item (click)=' navSpeakToAdvisorPage()'>
+        Speak To Advisor 
+    </button>
+    <button ion-item (click)='navSettingsPage()'>
+        Settings
+    </button>
+  <ion-item class='menu-version'>
+      <ion-icon item-left name='information-circle'></ion-icon>
+      App Version: {{firebase.version}}
+  </ion-item>
+
+</ion-content>

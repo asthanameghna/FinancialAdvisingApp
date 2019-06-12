@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button color='primary' class='navbar-textbutton' clear small (click)='dismiss()'><strong>Cancel</strong>
+      </button>
+      <!--<span ion-text  clear small color='primary'><strong>Cancel</strong></span>-->
+    </ion-buttons>
+    <ion-title class='title-center'>photo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ul class='ul'>
+    Make sure that your photos contain the following information: <br><br>
+    - Policy Name, Policy Number<br>
+    - Insured Person, Beneficiary (if any)<br>
+    - Inception Date, Expiry Date<br>
+    - Premium Amount, Frequency of Payment<br>
+    - Coverage Details and Amount<br>
+  </ul>
+  <div class='buttons'>
+  <button ion-button outline icon-left color="primary" class="button1" type="button" (click)="addPhoto()">
+    <ion-icon name='md-camera' color="primary"></ion-icon>
+      Camera
+  </button>
+  <button ion-button outline icon-left color="primary" class="button2" type="button" (click)="choosePhoto()">
+    <ion-icon name='ios-image' color="primary"></ion-icon>
+      Gallery
+  </button>
+  </div>
+</ion-content>
