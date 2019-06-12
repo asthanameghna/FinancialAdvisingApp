@@ -1,0 +1,119 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+$font-path: "../assets/fonts";
+
+@import "ionic.globals";
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+$green: #43acb0;
+$grey: #b9b9b9;
+// $green: #234869;
+
+$text-color:                                #333333;
+
+$tabs-background:                           white;
+$tabs-tab-color-inactive:                   $grey;
+
+$font-family-base:                          "Fira Sans", sans-serif !default;
+$font-family-md-base:                       "Fira Sans", sans-serif !default;
+
+$text-input-highlight-color-valid:          transparent;
+$text-input-md-show-error-highlight:        false;
+$text-input-md-show-success-highlight:      false;
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary:    #f79423,
+  secondary:  #43acb0,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222
+);
+
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+$tabs-ios-background:                      white;
+$tabs-ios-tab-color-active:                  $green;
+$tabs-ios-tab-color-inactive:                $grey;
+$tabs-ios-tab-icon-color-active:             $green;
+$item-ios-detail-push-color:               #9fa1a5;
+
+$toolbar-ios-background:                     white;
+
+$button-ios-background-color-activated:        $green;
+
+// $button-ios-background-color:                $green;
+
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+$tabs-md-background:                      white;
+$tabs-md-tab-color-active:                  $green;
+$tabs-md-tab-color-inactive:                $grey;
+$tabs-md-tab-icon-color-active:             $green;
+$item-md-detail-push-show:                  true;
+$item-md-detail-push-color:               #9fa1a5;
+
+$segment-button-md-background-color-activated:       $green;
+
+$toolbar-md-background:                     white;
+
+// $button-md-background-color:                $green;
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+$tabs-wp-background:                      white;
+$tabs-wp-tab-color-active:                  $green;
+$tabs-wp-tab-color-inactive:                $grey;
+$tabs-wp-tab-icon-color-active:             $green;
+$tabs-wp-tab-border-color-active:           $green;
+$item-wp-detail-push-show:                  true;
+$item-wp-detail-push-color:               #9fa1a5;
+
+$segment-button-wp-background-color-activated:       $green;
+
+$toolbar-wp-background:                    white;
+
+// $button-wp-background-color:                $green;
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+@import "ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";
