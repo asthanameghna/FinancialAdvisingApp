@@ -25,7 +25,7 @@
         "@ionic-native/push": "^4.1.0",
         "@ionic/storage": "2.0.0",
         "angularfire2": "2.0.0-beta.8",
-        "chart.js": "2.3.0",
+        "chart.js": "2.9.4",
         "cordova-android": "^6.2.3",
         "cordova-ios": "~4.3.1",
         "cordova-plugin-camera": "^2.3.1",
